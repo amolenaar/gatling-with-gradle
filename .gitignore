@@ -1,6 +1,7 @@
 *.iml
 *.idea
 *.iws
+*.ipr
 .classpath
 .project
 .gradle
@@ -8,3 +9,4 @@ target
 build
 out
 results
+projectFilesBackup*

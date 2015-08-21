@@ -6,12 +6,15 @@ apply plugin: 'jetty'
 
 task testSetup(type: TestSetup)
 
+def gatlingScenarioClass = 'simulations.TestSimulation'
+
 task runLoadTest(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     // Gatling application
     main = "io.gatling.app.Gatling"
     // Specify the simulation to run
-    args = ['-s', 'loadTests.TestSimulation']
+    args = [ '-s', gatlingScenarioClass,
+           '-rf', 'build/reports/gatling']
 }
 
 task testTeardown(type: TestTearDown) {
@@ -29,9 +32,6 @@ task wrapper(type: Wrapper) {
 
 sourceSets {
     main {
-        scala {
-            srcDirs = ['loadTestSrc']
-        }
         groovy {
             srcDirs = ['testWebAppSrc/groovy']
         }
