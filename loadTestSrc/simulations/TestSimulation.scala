@@ -1,12 +1,11 @@
-package loadTests
+package simulations
 
-import com.excilys.ebi.gatling.core.Predef._
-import com.excilys.ebi.gatling.http.Predef._
-import bootstrap._
+import io.gatling.core.Predef._
+import io.gatling.http.Predef._
 
 class TestSimulation extends Simulation {
 
-  val httpProtocol = httpConfig
+  val httpProtocol = http
     .baseURL("http://localhost:8094/gatling-with-gradle")
     .acceptHeader("application/json")
 
@@ -15,5 +14,5 @@ class TestSimulation extends Simulation {
         exec(http("hello world").get("/"))
     }
 
-  setUp(testScn.users(2).protocolConfig(httpProtocol))
+  setUp(testScn.inject(atOnceUsers(1)).protocols(httpProtocol))
 }

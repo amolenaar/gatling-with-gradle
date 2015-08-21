@@ -9,9 +9,9 @@ task testSetup(type: TestSetup)
 task runLoadTest(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     // Gatling application
-    main = "com.excilys.ebi.gatling.app.Gatling"
+    main = "io.gatling.app.Gatling"
     // Specify the simulation to run
-    args = Eval.me("['-s', 'loadTests.TestSimulation']")
+    args = ['-s', 'loadTests.TestSimulation']
 }
 
 task testTeardown(type: TestTearDown) {
@@ -24,7 +24,7 @@ testTeardown.mustRunAfter runLoadTest
 jettyStop.mustRunAfter testTeardown
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+    gradleVersion = '2.6'
 }
 
 sourceSets {
@@ -58,13 +58,13 @@ jettyRun {
 
 dependencies {
     // Gatling dependencies
-    compile 'com.excilys.ebi.gatling:gatling-app:1.5.3'
-    compile 'com.excilys.ebi.gatling.highcharts:gatling-charts-highcharts:1.5.3'
-    compile 'org.scala-lang:scala-compiler:2.9'
-    compile 'org.scala-lang:scala-library:2.9'
+    compile 'io.gatling:gatling-app:2.2.0-M3'
+    compile 'io.gatling.highcharts:gatling-charts-highcharts:2.2.0-M3'
+    compile 'org.scala-lang:scala-compiler:2.11.7'
+    compile 'org.scala-lang:scala-library:2.11.7'
 
     // Dependencies for the test Server
-    compile 'org.codehaus.groovy:groovy-all:2.2.1'
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
     providedCompile "javax.servlet:servlet-api:2.5"
     testCompile 'org.eclipse.jetty.aggregate:jetty-all-server:8.1.0.v20120127'
 }
